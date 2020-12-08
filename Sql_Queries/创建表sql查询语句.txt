@@ -1,0 +1,53 @@
+create table all_name(
+	id int primary key,
+    full_name varchar(40) not null
+);
+
+create table info
+(
+	sid int,
+    answer_date date,
+    region varchar(40) not null,
+    touch_history varchar(40) not null,
+    answer_q1 bit not null,#sql不支持bool型
+    answer_q2 bit not null,
+    answer_q3 bit not null,
+    constraint pk_info primary key( sid,answer_date)
+    );
+    
+create table questions(
+	question_id int ,
+    question_content varchar(40) not null,
+    questions_necessary bit not null,
+    constraint pk_questions primary key( question_id )
+    );
+create table Administrator
+(
+	aid INT PRIMARY KEY,
+	asex VARCHAR(4) NOT NULL,
+	aphone VARCHAR(40) NOT NULL,
+	adep VARCHAR(40) NOT NULL,
+	constraint fk_ad foreign key( aid ) references all_name(id)
+    );
+
+CREATE TABLE administrator_res(
+  aid int NOT NULL,
+  res_major varchar(40),
+  constraint pk_ar PRIMARY KEY (res_major)
+) ;
+
+
+
+CREATE TABLE student (
+  sid int,
+  ssex varchar(45) NOT NULL,
+  scollege varchar(45) NOT NULL,
+  smajor varchar(45) NOT NULL,#专业+年级
+  sclass varchar(45) NOT NULL,
+  sage int NOT NULL,#此处是年龄，给予保留
+  sphone VARCHAR(40) NOT NULL,
+  native_place varchar(45) NOT NULL,
+  state varchar(45) NOT NULL,
+  constraint pk_st PRIMARY KEY (sid),
+  constraint fk_st foreign key( sid ) references all_name(id)
+) ;
